@@ -273,7 +273,7 @@ class TrendReq(object):
         if self.geo == '':
             self.interest_by_region_widget['request'][
                 'resolution'] = resolution
-        elif self.geo == 'US' and resolution in ['DMA', 'CITY', 'REGION']:
+        elif resolution in ['DMA', 'CITY', 'REGION']:
             self.interest_by_region_widget['request'][
                 'resolution'] = resolution
 
@@ -298,7 +298,7 @@ class TrendReq(object):
             return df
 
         # rename the column with the search keyword
-        df = df[['geoName', 'geoCode', 'value']].set_index(
+        df = df[['geoName', 'value']].set_index(
             ['geoName']).sort_index()
         # split list columns into separate ones, remove brackets and split on comma
         result_df = df['value'].apply(lambda x: pd.Series(
